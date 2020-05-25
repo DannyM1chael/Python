@@ -6,16 +6,18 @@ class Node:
     def __str__(self):
         return str(self.value)
 
-class List:
+class SortedList:
     def __init__(self):
         self.top = Node()
     
     def append(self, value):
         current = self.top
-        while current.next_node is not None:
+        while current.next_node is not None and current.next_node.value < value:
             current = current.next_node
 
-        current.next_node = Node(value)
+        new_node = Node(value)
+        new_node.next_node = current.next_node
+        current.next_node = new_node
 
     def delete(self,value):
         current = self.top.next_node
@@ -37,9 +39,9 @@ class List:
             current = current.next_node
         return values + "]"
 
-lst = List()
+lst = SortedList()
 lst.append(75)
-lst.append('hello')
-lst.append(True)
+lst.append(12)
+lst.append(28)
 lst.append(6)
 print(lst)
